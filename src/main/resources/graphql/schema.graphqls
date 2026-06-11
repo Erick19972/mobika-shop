@@ -1,0 +1,14 @@
+type CartItem {
+    id: ID
+    productId: ID
+    quantity: Int
+}
+
+type Query {
+    cart: [CartItem]
+}
+
+type Mutation {
+    addToCart(productId: ID!, quantity: Int!): CartItem
+    deleteCartItem(id: ID!): Boolean
+}
