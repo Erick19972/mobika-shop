@@ -1,23 +1,23 @@
-package com.mobica.catalog.kafka;
+package com.mobica.catalog.RabbitMQ;
 
 
 import lombok.RequiredArgsConstructor;
+import org.apache.camel.Consume;
 import org.apache.camel.ProducerTemplate;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class CartConsumer {
 
     private final ProducerTemplate producerTemplate;
 
-    @RabbitListener(queues = "cart.queue")
+    @Consume("seda:cart-events")
     public void consume(String message) {
 
         System.out.println(
-                "EVENTO RECIBIDO DE RABBITMQ -> "
-                + message
+                "EVENTO RECIBIDO DE SEDA -> "
+                        + message
         );
 
         producerTemplate.sendBody(

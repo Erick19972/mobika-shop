@@ -9,22 +9,24 @@ public class PurchaseRoute extends RouteBuilder {
     @Override
     public void configure() {
 
-        from("direct:sendMail")
+        from("seda:cart-events")
 
-            .setHeader("To",
-                    constant("franky431216@hotmail.com"))
+                .log("EVENTO RECIBIDO -> ${body}")
 
-            .setHeader("Subject",
-                    constant("Producto agregado al carrito"))
+                .setHeader("To",
+                        constant("franky431216@hotmail.com"))
 
-            .setBody(simple(
-                    "Se recibió un evento:\n\n${body}"
-            ))
+                .setHeader("Subject",
+                        constant("Producto agregado al carrito"))
 
-            .to("smtp://{{smtp.host}}:{{smtp.port}}"
-                    + "?username={{smtp.username}}"
-                    + "&password={{smtp.password}}"
-                    + "&mail.smtp.auth=true"
-                    + "&mail.smtp.starttls.enable=true");
+                .setBody(simple(
+                        "Se recibió un evento:\n\n${body}"
+                ))
+
+                .to("smtp://{{smtp.host}}:{{smtp.port}}"
+                        + "?username={{smtp.username}}"
+                        + "&password={{smtp.password}}"
+                        + "&mail.smtp.auth=true"
+                        + "&mail.smtp.starttls.enable=true");
     }
 }

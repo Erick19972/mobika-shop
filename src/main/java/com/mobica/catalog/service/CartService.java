@@ -1,7 +1,7 @@
 package com.mobica.catalog.service;
 
+import com.mobica.catalog.RabbitMQ.CartProducer;
 import com.mobica.catalog.entity.CartItem;
-import com.mobica.catalog.kafka.CartProducer;
 import com.mobica.catalog.repository.CartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

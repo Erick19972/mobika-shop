@@ -1,24 +1,19 @@
-package com.mobica.catalog.kafka;
+package com.mobica.catalog.RabbitMQ;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.apache.camel.ProducerTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class CartProducer {
 
-    private final RabbitTemplate rabbitTemplate;
+    private final ProducerTemplate producerTemplate;
 
     public void sendCartEvent(String message) {
-
-        rabbitTemplate.convertAndSend(
-                "cart.queue",
+        producerTemplate.sendBody(
+                "seda:cart-events",
                 message
-        );
-
-        System.out.println(
-                "EVENTO ENVIADO A RABBITMQ -> " + message
         );
     }
 }
