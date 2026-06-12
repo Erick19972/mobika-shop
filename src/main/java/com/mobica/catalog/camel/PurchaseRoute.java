@@ -8,8 +8,8 @@ public class PurchaseRoute extends RouteBuilder {
 
     @Override
     public void configure() {
-     /*
-        from("kafka:cart-events?brokers=localhost:9092")
+
+        from("kafka:cart-events")
             .log("CAMEL RECIBIÓ -> ${body}")
 
             .setHeader("To", constant("franky431216@hotmail.com"))
@@ -23,6 +23,6 @@ public class PurchaseRoute extends RouteBuilder {
                 + "?username={{smtp.username}}"
                 + "&password={{smtp.password}}"
                 + "&mail.smtp.auth=true"
-                + "&mail.smtp.starttls.enable=true");     */
+                + "&mail.smtp.starttls.enable=true");
     }
 }
