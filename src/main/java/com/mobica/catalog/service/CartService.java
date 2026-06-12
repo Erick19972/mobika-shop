@@ -19,12 +19,12 @@ public class CartService {
 
         CartItem savedItem = repository.save(item);
 
-        producer.sendCartEvent(
-                "PRODUCT_ADDED_TO_CART | productId="
-                        + savedItem.getProductId()
-                        + " | quantity="
-                        + savedItem.getQuantity()
-        );
+       // producer.sendCartEvent(
+        //        "PRODUCT_ADDED_TO_CART | productId="
+        //                + savedItem.getProductId()
+        //                + " | quantity="
+              //          + savedItem.getQuantity()
+        //);
 
         return savedItem;
     }
@@ -37,9 +37,9 @@ public class CartService {
 
         repository.deleteById(id);
 
-        producer.sendCartEvent(
-                "PRODUCT_REMOVED_FROM_CART | cartItemId="
-                        + id
-        );
+      //  producer.sendCartEvent(
+        //        "PRODUCT_REMOVED_FROM_CART | cartItemId="
+           //             + id
+       // );
     }
 }
